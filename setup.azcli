@@ -1,0 +1,28 @@
+
+# setup Azure SP on local machine first
+
+# verify on Win machine that you are logged in
+az account list --output table
+
+# get subsctiption id
+az account show --query "{subscriptionId:id}" --output tsv
+
+# PWSH
+$subscriptionId = az account show --query "{subscriptionId:id}" --output tsv
+write-host "Subscription ID: $subscriptionId"
+
+$envId = -join (1..8 | ForEach-Object { "{0:x}" -f (Get-Random -Max 16) })
+write-host "Environment ID: $envId"
+
+$spname = "sp-cgnsws-$envId"
+write-host "SP Name: $spname"
+
+$sp = az ad sp create-for-rbac --name $spname --role contributor --scopes /subscriptions/$subscriptionId 
+$sp | Out-File -FilePath "sp-cgnsws-$envId.json"
+gc "sp-cgnsws-$envId.json" 
+
+# remove when 
+az ad sp delete --id (gc "sp-cgnsws-$envId.json" | ConvertFrom-Json).clientId
+
+# audit SPs
+az ad sp list --show-mine --output table
