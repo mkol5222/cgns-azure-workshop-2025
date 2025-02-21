@@ -13,3 +13,6 @@ az account list -o table
 # force local browser login
 az login
 
+# if login from Codespace fails, use ./setup.azcli in local Powershell terminal or in https://shell.azure.com/powershell
+
+

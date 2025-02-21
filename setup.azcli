@@ -7,7 +7,13 @@ az account list --output table
 # get subsctiption id
 az account show --query "{subscriptionId:id}" --output tsv
 
-# PWSH
+# PWSH - https://shell.azure.com/powershell or local AZ CLI on Win?
+
+# make sure you use PowerShell
+pwsh
+
+az account list --output table
+
 $subscriptionId = az account show --query "{subscriptionId:id}" --output tsv
 write-host "Subscription ID: $subscriptionId"
 
@@ -17,11 +23,22 @@ write-host "Environment ID: $envId"
 $spname = "sp-cgnsws-$envId"
 write-host "SP Name: $spname"
 
-$sp = az ad sp create-for-rbac --name $spname --role contributor --scopes /subscriptions/$subscriptionId 
-$sp | Out-File -FilePath "sp-cgnsws-$envId.json"
-gc "sp-cgnsws-$envId.json" 
+$sp = az ad sp create-for-rbac --name $spname --role contributor --scopes /subscriptions/$subscriptionId -o json | ConvertFrom-Json
+$sp | Add-Member -MemberType NoteProperty -Name envId -Value $envId
+$sp | Add-Member -MemberType NoteProperty -Name subscriptionId -Value $subscriptionId
+$sp | Add-Member -MemberType NoteProperty -Name name -Value $spname
+$sp | ConvertTo-Json | Out-File -FilePath sp.json
+gc sp.json
 
-# remove when 
+# copy the SP JSON to the Linux machine - e.g. /workspaces/cgns-azure-workshop-2025/sp.json
+# e.g. cut & paste to 
+# cat > /workspaces/cgns-azure-workshop-2025/sp.json
+gc sp.json
+
+####
+# remove when finioshed
+$sp = gc sp.json | ConvertFrom-Json
+write-host "SP name: $($sp.name)"
 az ad sp delete --id (gc "sp-cgnsws-$envId.json" | ConvertFrom-Json).clientId
 
 # audit SPs
