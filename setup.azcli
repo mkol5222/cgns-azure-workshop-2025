@@ -1,6 +1,8 @@
 
 # setup Azure SP on local machine first
 
+# GOAL: get sp.json with new Azure service principal that is Contributor on the subscription
+
 # verify on Win machine that you are logged in
 az account list --output table
 
@@ -24,6 +26,7 @@ $spname = "sp-cgnsws-$envId"
 write-host "SP Name: $spname"
 
 $sp = az ad sp create-for-rbac --name $spname --role contributor --scopes /subscriptions/$subscriptionId -o json | ConvertFrom-Json
+#$sp = az ad sp create-for-rbac --name $spname --role Reader --scopes /subscriptions/$subscriptionId -o json | ConvertFrom-Json
 $sp | Add-Member -MemberType NoteProperty -Name envId -Value $envId
 $sp | Add-Member -MemberType NoteProperty -Name subscriptionId -Value $subscriptionId
 $sp | Add-Member -MemberType NoteProperty -Name name -Value $spname
@@ -35,11 +38,13 @@ gc sp.json
 # cat > /workspaces/cgns-azure-workshop-2025/sp.json
 gc sp.json
 
+
+
 ####
-# remove when finioshed
+# remove when finished
 $sp = gc sp.json | ConvertFrom-Json
 write-host "SP name: $($sp.name)"
-az ad sp delete --id (gc "sp-cgnsws-$envId.json" | ConvertFrom-Json).clientId
+az ad sp delete --id (gc sp.json | ConvertFrom-Json).appId
 
 # audit SPs
 az ad sp list --show-mine --output table
