@@ -1,39 +1,20 @@
 # cgns-azure-workshop-2025
 Check Point CloduGuard Network Security (CGNS) Azure workshop
 
-Follow relevant NOTES.md for the workshop
+### Steps
 
-Azure login
+1. Create a service principal (sp.json) in Azure Cloud Shell based on commands in ./setup.azcli
+JSON data structure for `sp.json` is shown at the end.
 
-```shell
-# current state?
-az account list -o table
-# NOTE: run Codespace in local VScode to take advantage of port-forwarding of login callback from browser
+2. Create file `sp.json` under `/workspaces/cgns-azure-workshop-2025` in JSON format from Azure Shell SP creation process above.
 
-# try login
-az login
+3. Check SP is valid by running
+`make check-sp`
 
-# if login from Codespace fails, use ./setup.azcli in local Powershell terminal or in https://shell.azure.com/powershell
+It will look for `sp.json`, try to login Azure CLI using the SP, and list the subscriptions.
+It will also create and delete test resouce group.
 
-# we assume sp.json in root of this workspace created above (setup.azcli)
-cat /workspaces/cgns-azure-workshop-2025/sp.json
-
-# login using service principal
-AZ_TENANTID=$(jq -r .tenant /workspaces/cgns-azure-workshop-2025/sp.json)
-AZ_APPID=$(jq -r .appId /workspaces/cgns-azure-workshop-2025/sp.json)
-AZ_PASSWORD=$(jq -r .password /workspaces/cgns-azure-workshop-2025/sp.json)
-echo $AZ_TENANTID
-az login --service-principal \
-  --tenant "${AZ_TENANTID}" \
-  --username "${AZ_APPID}" \
-  --password "${AZ_PASSWORD}"
-
-# current state?
-az account list -o table
-
-ENVID=$(jq -r .envId /workspaces/cgns-azure-workshop-2025/sp.json)
-echo $ENVID
-az group create -g "rg-$ENVID" -l "northeurope"
-# delete
-az group delete -g "rg-$ENVID" --no-wait --yes
-```
+4. Deploy Check Point Management Server using Terraform
+`make cpman-up`
+It is using Check Point terraform module for Management Server into new VNET 
+and is authenticated using the SP in `sp.json`.
