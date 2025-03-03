@@ -34,3 +34,6 @@ linux-down:
 
 ssh-linux:
 	./scripts/ssh-linux.sh
+
+check-cpman-api:
+	./scripts/check-cpman-api.sh 
