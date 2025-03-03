@@ -34,7 +34,7 @@ mgmt_server="https://$CPMAN_IP"
 
 # login
 
-RESP=$(curl -ks -X POST $mgmt_server/web_api/login -H 'Content-Type: application/json' -d "{\"user\":\"$U\",\"password\":\"$P\"}")
+RESP=$(curl -m 3 -ks -X POST $mgmt_server/web_api/login -H 'Content-Type: application/json' -d "{\"user\":\"$U\",\"password\":\"$P\"}")
 # check if resp is valid JSON
 if echo "$RESP" | jq empty >/dev/null 2>&1; then
     echo "Management is READY"

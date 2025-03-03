@@ -1,27 +1,26 @@
 
-# setup Azure SP on local machine first
+# Goal: setup Azure SPs in Azure Cloud Shell environment (https://portal.azure.com/#cloudshell/)
 
-# GOAL: get sp.json with new Azure service principal that is Contributor on the subscription
-
-# verify on Win machine that you are logged in
-az account list --output table
-
-# get subsctiption id
-az account show --query "{subscriptionId:id}" --output tsv
-
-# PWSH - https://shell.azure.com/powershell or local AZ CLI on Win?
+# IN: Owner of Azure subscription in terminal of Azure Cloud Shell
+# OUT: sp.json and reader.json with administrative and read-only persmissions to Azure environment 
 
 # make sure you use PowerShell
 pwsh
 
+### confirm you are logget in
 az account list --output table
+# own permission - should be Owner of subscription scope
+az role assignment list --assignee "$(az ad signed-in-user show --query id -o tsv)" --output table
 
+# get subscription ID
 $subscriptionId = az account show --query "{subscriptionId:id}" --output tsv
 write-host "Subscription ID: $subscriptionId"
 
+# make env unique by random number
 $envId = -join (1..8 | ForEach-Object { "{0:x}" -f (Get-Random -Max 16) })
 write-host "Environment ID: $envId"
 
+# create SP with administrative permissions
 $spname = "sp-cgnsws-$envId"
 write-host "SP Name: $spname"
 
@@ -50,22 +49,11 @@ $sp | Add-Member -MemberType NoteProperty -Name name -Value $spname
 $sp | ConvertTo-Json | Out-File -FilePath reader.json
 gc reader.json
 
-# copy the SP JSON to the Linux machine - e.g. /workspaces/cgns-azure-workshop-2025/reader.json
+# copy reader's SP JSON to the Linux machine - e.g. /workspaces/cgns-azure-workshop-2025/reader.json
 # e.g. cut & paste to 
 # cat > /workspaces/cgns-azure-workshop-2025/reader.json
 gc reader.json
 
-
-####
-# remove when finished
-$sp = gc sp.json | ConvertFrom-Json
-write-host "SP name: $($sp.name)"
-az ad sp delete --id (gc sp.json | ConvertFrom-Json).appId
-
-# remove READER SP when finished
-$sp = gc reader.json | ConvertFrom-Json
-write-host "READER SP name: $($sp.name)"
-az ad sp delete --id (gc reader.json | ConvertFrom-Json).appId
-
-# audit SPs
-az ad sp list --show-mine --output table
+### RESULT:
+# sp.json and reader.json with administrative and read-only persmissions to Azure environment
+# make sure sp.json and reader.json are saved in the same directory as the setup.azcli script in Codespace ("root" of workspace)

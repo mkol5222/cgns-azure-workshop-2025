@@ -1,0 +1,17 @@
+
+########################################################################
+####
+# CLEANUP: remove SPs WHEN FINISHED
+####
+########################################################################
+$sp = gc sp.json | ConvertFrom-Json
+write-host "SP name: $($sp.name)"
+az ad sp delete --id (gc sp.json | ConvertFrom-Json).appId
+
+# remove READER SP when finished
+$sp = gc reader.json | ConvertFrom-Json
+write-host "READER SP name: $($sp.name)"
+az ad sp delete --id (gc reader.json | ConvertFrom-Json).appId
+
+# audit SPs
+az ad sp list --show-mine --output table
