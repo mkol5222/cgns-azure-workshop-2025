@@ -36,3 +36,17 @@ az group create --name $RGNAME --location westeurope
 
 echo "Deleting RG $RGNAME"
 az group delete --name $RGNAME --yes
+
+echo "Listing role assignments for sp.json"
+az role assignment list --assignee $AZ_APPID -o table --all
+#echo "Listing app permissions for sp.json"
+#az ad app permission list --id $AZ_APPID -o table
+
+#echo "Listing role assignments for reader.json"
+#AZ_READER_APPID=$(jq -r .appId reader.json)
+#az role assignment list --assignee $AZ_READER_APPID -o table --help
+
+#az role assignment list -o table
+
+echo
+echo "Azure SP test passed"

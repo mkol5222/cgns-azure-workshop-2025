@@ -25,8 +25,7 @@ write-host "Environment ID: $envId"
 $spname = "sp-cgnsws-$envId"
 write-host "SP Name: $spname"
 
-$sp = az ad sp create-for-rbac --name $spname --role contributor --scopes /subscriptions/$subscriptionId -o json | ConvertFrom-Json
-#$sp = az ad sp create-for-rbac --name $spname --role Reader --scopes /subscriptions/$subscriptionId -o json | ConvertFrom-Json
+$sp = az ad sp create-for-rbac --name $spname --role Owner --scopes /subscriptions/$subscriptionId -o json | ConvertFrom-Json
 $sp | Add-Member -MemberType NoteProperty -Name envId -Value $envId
 $sp | Add-Member -MemberType NoteProperty -Name subscriptionId -Value $subscriptionId
 $sp | Add-Member -MemberType NoteProperty -Name name -Value $spname
@@ -38,6 +37,23 @@ gc sp.json
 # cat > /workspaces/cgns-azure-workshop-2025/sp.json
 gc sp.json
 
+###
+# READER Azure SP
+
+$readerSpname = "sp-cgnsws-reader-$envId"
+write-host "READER SP Name: $readerSpname"
+
+$sp = az ad sp create-for-rbac --name $readerSpname --role Reader --scopes /subscriptions/$subscriptionId -o json | ConvertFrom-Json
+$sp | Add-Member -MemberType NoteProperty -Name envId -Value $envId
+$sp | Add-Member -MemberType NoteProperty -Name subscriptionId -Value $subscriptionId
+$sp | Add-Member -MemberType NoteProperty -Name name -Value $spname
+$sp | ConvertTo-Json | Out-File -FilePath reader.json
+gc reader.json
+
+# copy the SP JSON to the Linux machine - e.g. /workspaces/cgns-azure-workshop-2025/reader.json
+# e.g. cut & paste to 
+# cat > /workspaces/cgns-azure-workshop-2025/reader.json
+gc reader.json
 
 
 ####
@@ -45,6 +61,11 @@ gc sp.json
 $sp = gc sp.json | ConvertFrom-Json
 write-host "SP name: $($sp.name)"
 az ad sp delete --id (gc sp.json | ConvertFrom-Json).appId
+
+# remove READER SP when finished
+$sp = gc reader.json | ConvertFrom-Json
+write-host "READER SP name: $($sp.name)"
+az ad sp delete --id (gc reader.json | ConvertFrom-Json).appId
 
 # audit SPs
 az ad sp list --show-mine --output table

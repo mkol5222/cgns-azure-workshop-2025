@@ -36,3 +36,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 sp.json
+reader.json
+policy/sid.json
+policy/fingerprints.json

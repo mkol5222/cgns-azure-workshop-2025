@@ -13,3 +13,15 @@ ssh-cpman:
 
 serial-cpman:
 	./scripts/serial-cpman.sh
+
+reader-up:
+	./scripts/reader-up.sh
+
+reader-down:
+	./scripts/reader-down.sh
+
+policy-up:
+	./scripts/policy-up.sh
+
+policy-down:
+	./scripts/policy-down.sh
