@@ -25,3 +25,9 @@ policy-up:
 
 policy-down:
 	./scripts/policy-down.sh
+
+linux-up:
+	./scripts/linux-up.sh
+
+linux-down:
+	./scripts/linux-down.sh
