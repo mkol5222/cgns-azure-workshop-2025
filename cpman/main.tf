@@ -18,7 +18,7 @@ module "cpman" {
   subnet_prefix                  = "10.3.0.0/24"
   management_GUI_client_network  = "0.0.0.0/0"
   mgmt_enable_api                = "all"
-  admin_password                 = "Welcome@Home#1984"
+  admin_password                 = var.admin_pass
   vm_size                        = "Standard_D3_v2"
   disk_size                      = "110"
   vm_os_sku                      = "mgmt-byol"

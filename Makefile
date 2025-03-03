@@ -31,3 +31,6 @@ linux-up:
 
 linux-down:
 	./scripts/linux-down.sh
+
+ssh-linux:
+	./scripts/ssh-linux.sh
