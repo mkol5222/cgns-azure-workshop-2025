@@ -37,3 +37,8 @@ ssh-linux:
 
 check-cpman-api:
 	./scripts/check-cpman-api.sh 
+
+vmss-up:
+	./scripts/vmss-up.sh
+vmss-down:
+	./scripts/vmss-down.sh
