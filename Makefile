@@ -51,3 +51,5 @@ vmss-up:
 	./scripts/vmss-up.sh
 vmss-down:
 	./scripts/vmss-down.sh
+vmss-list:
+	./scripts/vmss-list.sh
