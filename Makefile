@@ -2,6 +2,15 @@
 check-sp:
 	./scripts/check-sp.sh
 
+tfstate-up:
+	./scripts/tfstate-up.sh
+
+tfstate-down:
+	./scripts/tfstate-down.sh
+
+tfstate-check:
+	./scripts/tfstate-check.sh
+
 cpman-up:
 	./scripts/cpman-up.sh
 
