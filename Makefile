@@ -53,3 +53,12 @@ vmss-down:
 	./scripts/vmss-down.sh
 vmss-list:
 	./scripts/vmss-list.sh
+
+linux-rt:
+	./scripts/linux-rt.sh
+watch-linux-rt:
+	watch -d ./scripts/linux-rt.sh
+linux-fwon:
+	./scripts/linux-fwon.sh
+linux-fwoff:
+	./scripts/linux-fwoff.sh
