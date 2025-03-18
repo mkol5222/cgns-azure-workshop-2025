@@ -62,3 +62,6 @@ linux-fwon:
 	./scripts/linux-fwon.sh
 linux-fwoff:
 	./scripts/linux-fwoff.sh
+
+cme:
+	./scripts/cme.sh
