@@ -69,7 +69,7 @@ resource "checkpoint_management_access_rule" "from_feedME" {
 
   name = "from feedME"
 
-  source = [checkpoint_management_network_feed.feedME.name, checkpoint_management_network_feed.quic.name]
+  source = [checkpoint_management_network_feed.feedME.name, checkpoint_management_network_feed.quiccloud.name]
 
   enabled = true
 
