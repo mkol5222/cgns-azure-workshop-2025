@@ -60,6 +60,40 @@ resource "checkpoint_management_access_rule" "from_net_linux" {
   }
 }
 
+resource "checkpoint_management_access_rule" "from_feedME" {
+
+  depends_on = [checkpoint_management_azure_data_center_server.azureDC, checkpoint_management_data_center_query.appLinux1]
+
+  layer    = "${checkpoint_management_package.package.name} Network"
+  position = { above = checkpoint_management_access_rule.from_net_linux.id }
+
+  name = "from feedME"
+
+  source = [checkpoint_management_network_feed.feedME.name, checkpoint_management_network_feed.quic.name]
+
+  enabled = true
+
+  destination        = ["Any"]
+  destination_negate = false
+
+  service        = ["Any"]
+  service_negate = false
+
+  action = "Accept"
+  action_settings = {
+    enable_identity_captive_portal = false
+  }
+
+  track = {
+    accounting              = false
+    alert                   = "none"
+    enable_firewall_session = true
+    per_connection          = true
+    per_session             = true
+    type                    = "Log"
+  }
+}
+
 resource "checkpoint_management_access_rule" "from_dc1_app_linux1" {
 
   depends_on = [checkpoint_management_azure_data_center_server.azureDC, checkpoint_management_data_center_query.appLinux1]
