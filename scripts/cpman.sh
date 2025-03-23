@@ -91,8 +91,6 @@ done
 
 echo "Creating policy"
 (cd ./policy; terraform init)
-(cd ./policy; terraform apply -auto-approve)
-sleep 5
 (cd ./policy; terraform apply -auto-approve -var publish=true)
 
 echo

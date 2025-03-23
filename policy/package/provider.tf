@@ -21,4 +21,8 @@ provider "checkpoint" {
   username = var.cpman_admin
   password = var.cpman_pass
   server   = var.cpman_ip
+  sesion_timeout = 60
+  session_name = "terraform"
+  session_description = "policy package"
+
 }

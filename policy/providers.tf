@@ -12,6 +12,11 @@ provider "checkpoint" {
   username = var.cpman_admin
   password = var.cpman_pass
   server   = local.cpman_ip
+
+    sesion_timeout = 60
+  session_name = "terraform"
+  session_description = "main"
+
 }
 
 provider "azurerm" {
