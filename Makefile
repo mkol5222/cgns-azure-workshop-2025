@@ -1,9 +1,10 @@
+cpman-full:
+	./scripts/cpman.sh
 
 check-sp:
 	./scripts/check-sp.sh
 
-cpman:
-	./scripts/cpman.sh
+
 
 tfstate-up:
 	./scripts/tfstate-up.sh
