@@ -20,3 +20,9 @@ resource "checkpoint_management_publish" "policy" {
   #   resource.checkpoint_management_azure_data_center_server.azureDC,
   # ]
 }
+
+resource "checkpoint_management_logout" "example" {
+  depends_on = [checkpoint_management_publish.policy]
+  count    = var.publish ? 1 : 0
+  triggers = ["${timestamp()}"]
+}

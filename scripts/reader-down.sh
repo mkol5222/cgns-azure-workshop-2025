@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-(cd ./reader; terraform destroy)
+(cd ./reader; terraform destroy -var publish=true)

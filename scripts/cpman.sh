@@ -90,8 +90,7 @@ done
 # now we can build cpman
 
 echo "Creating policy"
-(cd ./policy; terraform init)
-(cd ./policy; terraform apply -auto-approve -var publish=true)
+make policy-up
 
 echo
 echo "cpman is ready"
@@ -99,6 +98,9 @@ echo "Management IP is $CPMAN_IP"
 echo
 
 # make ssh-cpman
+# mgmt_cli -r true show sessions details-level full --format json | jq '.objects[]|[.uid,."ip-address",."user-name",.changes, .locks]'
 # mgmt_cli -r true show sessions details-level full --format json | jq '.objects[]|select(.changes>0)|[.uid,."ip-address",."user-name",.changes, .locks]'
-# 
+# mgmt_cli -r true take-over-session uid "d61a1804-a2b9-4039-9f7d-b247c907c99c" disconnect-active-session true  --format json
+# mgmt_cli -r true show last-published-session   --format json
+
 
