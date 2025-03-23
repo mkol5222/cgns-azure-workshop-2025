@@ -9,3 +9,8 @@ variable "cpman_pass" {
   type        = string
   default     = "Welcome@Home#1984"
 }
+
+variable "cpman_ip" {
+  description = "IP address of the Check Point Management Server"
+  type        = string
+}

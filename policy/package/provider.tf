@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     checkpoint = {
-      source = "CheckPointSW/checkpoint"
+      source  = "CheckPointSW/checkpoint"
       version = "2.9.0"
     }
   }
@@ -20,5 +20,5 @@ provider "checkpoint" {
   # Configuration options
   username = var.cpman_admin
   password = var.cpman_pass
-  server   = local.cpman_ip
+  server   = var.cpman_ip
 }

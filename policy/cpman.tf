@@ -1,6 +1,6 @@
 locals {
-    cpmanRG = "cpman-${local.spfile.envId}"
-    cpman_ip = data.azurerm_virtual_machine.cpman.public_ip_address
+  cpmanRG  = "cpman-${local.spfile.envId}"
+  cpman_ip = data.azurerm_virtual_machine.cpman.public_ip_address
 }
 
 data "azurerm_virtual_machine" "cpman" {

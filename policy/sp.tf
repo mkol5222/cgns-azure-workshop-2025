@@ -1,3 +1,3 @@
 locals {
-  spfile = jsondecode(file("../sp.json"))
+  spfile = jsondecode(file("${path.module}/../sp.json"))
 }
