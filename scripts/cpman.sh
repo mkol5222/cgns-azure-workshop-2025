@@ -87,4 +87,20 @@ while true; do
     sleep 15
 done
 
+# now we can build cpman
+
+echo "Creating policy"
+(cd ./policy; terraform init)
+(cd ./policy; terraform apply -auto-approve)
+sleep 5
+(cd ./policy; terraform apply -auto-approve -var publish=true)
+
+echo
+echo "cpman is ready"
+echo "Management IP is $CPMAN_IP"
+echo
+
+# make ssh-cpman
+# mgmt_cli -r true show sessions details-level full --format json | jq '.objects[]|select(.changes>0)|[.uid,."ip-address",."user-name",.changes, .locks]'
+# 
 
