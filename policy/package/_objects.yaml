@@ -1,0 +1,13 @@
+networks:
+  - name: net_windows7
+    subnet: 10.0.10.0/24
+    color: pink
+    tags:
+      - windows
+      - windows7
+  - name: net_windows10
+    subnet: 10.10.10.0/24
+    color: blue
+    tags:
+      - windows
+      - windows10

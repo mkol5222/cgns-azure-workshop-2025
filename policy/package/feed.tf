@@ -13,7 +13,7 @@ resource "checkpoint_management_network_feed" "feedME" {
 
 resource "checkpoint_management_network_feed" "quiccloud" {
   name     = "quiccloud"
-  feed_url = "https://quic.cloud/ips"
+  feed_url = "https://quic.cloud/ips?ln"
   #   username = "feed_username"
   #   password = "feed_password"
   feed_format     = "Flat List"
