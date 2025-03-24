@@ -1,3 +1,7 @@
+output "feeds" {
+    value = module.package.feeds
+}
+
 output "objects" {
   value = module.package.objects
 }

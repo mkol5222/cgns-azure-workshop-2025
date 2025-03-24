@@ -1,0 +1,7 @@
+feeds:
+- name: dev_app1_web
+  url: https://inform.klaud.online/feed/dev_app1_web
+  jq: .[].podIP
+- name: dev_m1_m1
+  url: https://inform.klaud.online/feed/dev_m1_m1
+  jq: .[].podIP
