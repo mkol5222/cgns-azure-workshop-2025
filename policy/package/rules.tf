@@ -4,11 +4,11 @@ resource "checkpoint_management_access_rule" "ssh" {
   #position = { top = "top" }
   name = "allow SSH"
 
-  source = ["Any"]
+  source = [checkpoint_management_group.groups["gr_trusted"].name]
 
   enabled = true
 
-  destination        = ["Any"]
+  destination        = [checkpoint_management_dynamic_object.LocalGatewayExternal.name, checkpoint_management_dynamic_object.LocalGatewayInternal.name]
   destination_negate = false
 
   service        = ["ssh"]

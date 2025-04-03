@@ -24,6 +24,7 @@ cpman-down:
 
 ssh-cpman:
 	./scripts/ssh-cpman.sh
+cpman-ssh: ssh-cpman
 
 serial-cpman:
 	./scripts/serial-cpman.sh
@@ -39,6 +40,7 @@ reader-down:
 
 policy-up:
 	./scripts/policy-up.sh
+policy: policy-up
 
 policy-down:
 	./scripts/policy-down.sh
@@ -59,6 +61,10 @@ check-cpman-api:
 
 vmss-up:
 	./scripts/vmss-up.sh
+vmss: vmss-up
+vmss-ssh:
+	./scripts/vmss-ssh.sh
+ssh-vmss: vmss-ssh
 vmss-down:
 	./scripts/vmss-down.sh
 vmss-list:
