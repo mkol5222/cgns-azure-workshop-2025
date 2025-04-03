@@ -4,7 +4,8 @@ cpman-full:
 check-sp:
 	./scripts/check-sp.sh
 
-
+get-sp:
+	./scripts/get-sp.sh
 
 tfstate-up:
 	./scripts/tfstate-up.sh
@@ -26,6 +27,9 @@ ssh-cpman:
 
 serial-cpman:
 	./scripts/serial-cpman.sh
+
+serial: serial-cpman
+cpman-serial: serial-cpman
 
 reader-up:
 	./scripts/reader-up.sh
