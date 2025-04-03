@@ -36,7 +36,7 @@ hosts:
     groups:
       - gr_trusted
   - name: martin
-    ipv4_address: 88.100.229.104
+    ipv4_address: 194.228.2.1
     color: pink
     tags:
       - trusted
