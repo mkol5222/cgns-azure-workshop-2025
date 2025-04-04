@@ -28,7 +28,7 @@ networks:
 hosts:
 #  20.61.126.208
   - name: codespace
-    ipv4_address: 20.61.126.208
+    ipv4_address: 4.180.183.242
     color: pink
     tags:
       - trusted

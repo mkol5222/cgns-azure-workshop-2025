@@ -19,6 +19,8 @@ tfstate-check:
 cpman-up:
 	./scripts/cpman-up.sh
 
+cpman: cpman-up
+
 cpman-down:
 	./scripts/cpman-down.sh
 
