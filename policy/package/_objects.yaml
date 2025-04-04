@@ -36,6 +36,7 @@ hosts:
       - github
     groups:
       - gr_trusted
+      - gr_magic
   - name: martin
     ipv4_address: 194.228.2.1
     color: pink
