@@ -5,7 +5,9 @@ variable "publish" {
 }
 
 locals {
-  publish_triggers = [for filename in fileset(path.module, "package/*.tf") : filesha256(filename)]
+  publish_triggers = [
+    for filename in fileset(path.module, "package/*.{tf,yaml}") : filesha256(filename)
+  ]
 }
 
 
