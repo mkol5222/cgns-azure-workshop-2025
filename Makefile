@@ -1,6 +1,13 @@
 cpman-full:
 	./scripts/cpman.sh
 
+cpman-stop:
+	./scripts/stop-cpman.sh
+cpman-start:
+	./scripts/start-cpman.sh
+stop-cpman: cpman-stop
+start-cpman: cpman-start
+
 check-sp:
 	./scripts/check-sp.sh
 
