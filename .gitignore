@@ -40,3 +40,6 @@ reader.json
 policy/sid.json
 policy/fingerprints.json
 tfstate.json
+
+tmp/
+
