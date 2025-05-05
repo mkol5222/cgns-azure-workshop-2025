@@ -7,6 +7,14 @@ networks:
       - windows7
     groups:
       - gr_none
+  - name: net_111
+    subnet: 10.0.111.0/24
+    color: pink
+    tags:
+      - windows
+      - windows7
+    groups:
+      - gr_none
   # - name: net_windows7
   #   subnet: 10.0.10.0/24
   #   color: pink
