@@ -26,8 +26,8 @@ module "standalone" {
   vm_size                         = "Standard_D4s_v3"
   disk_size                       = "110"
   vm_os_sku                       = "sg-byol"
-  vm_os_offer                     = "check-point-cg-r8120"
-  os_version                      = "R8120"
+  vm_os_offer                     = "check-point-cg-r8110"
+  os_version                      = "R8110"
   bootstrap_script                = "touch /home/admin/bootstrap.txt; echo 'hello_world' > /home/admin/bootstrap.txt"
   allow_upload_download           = true
   authentication_type             = "Password"
