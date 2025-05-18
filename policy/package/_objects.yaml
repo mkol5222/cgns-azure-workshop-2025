@@ -7,6 +7,7 @@ networks:
       - windows7
     groups:
       - gr_none
+      - gr_lju
   - name: net_111
     subnet: 10.0.111.0/24
     color: pink
@@ -42,9 +43,11 @@ hosts:
       - trusted
       - MadeByTF
       - github
+      - made-in-lju
     groups:
       - gr_trusted
       - gr_magic
+      - gr_lju
   - name: martin
     ipv4_address: 194.228.2.1
     color: pink
