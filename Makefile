@@ -1,3 +1,10 @@
+
+gws-up:
+	./scripts/gws-up.sh
+gws-down:
+	./scripts/gws-down.sh
+gws: gws-up
+
 cpman-full:
 	./scripts/cpman.sh
 

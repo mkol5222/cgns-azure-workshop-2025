@@ -1,0 +1,1 @@
+# template of add-simple-gateway commands
