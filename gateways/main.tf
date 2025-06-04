@@ -15,6 +15,16 @@ locals {
             address_prefix = "10.92"
         }
     }
+    //gateway_rgs = [for gw in local.gateways : "gw-${gw.key}-${local.spfile.envId}"]
+}
+
+output "gateways" {
+  value = [for gw_key, gw_value in local.gateways : {
+    name   = gw_key
+    data = gw_value
+    rg = "gw-${gw_key}-${local.spfile.envId}",
+    # name: gw_key,
+  }]
 }
 
 module "gw" {

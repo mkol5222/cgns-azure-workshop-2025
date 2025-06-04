@@ -18,8 +18,7 @@ mgmt_cli -r true show sessions details-level full --format json | jq -r '.object
 
 # provision
 
-mgmt_cli -r true \
-  add host name "localhost" ipv4-address "127.0.0.1" color "blue" ignore-warnings true
+mgmt_cli -r true add host name "localhost" ipv4-address "127.0.0.1" color "blue" ignore-warnings true
   
 mgmt_cli -r true \
   add simple-gateway \
