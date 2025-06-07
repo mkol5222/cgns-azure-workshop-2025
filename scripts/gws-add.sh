@@ -1,5 +1,16 @@
 #!/bin/bash
 
+cat << EOF
+
+# enter CPMAN management server
+make ssh-cpman
+
+# on management server run:
+mgmt_cli -r true add host name "localhost" ipv4-address "127.0.0.1" color "blue" ignore-warnings true
+
+EOF
+
+
 (cd gateways; terraform output -json gateways) | jq -r -c '.[]' | while read -r LINE; do
     echo
     GW=$(echo "$LINE" | jq -r '.name')
@@ -27,9 +38,6 @@
 # Add simple GATEWAY to Check Point Management Server
 # ${GW} in RG ${RG}
 
-make ssh-cpman
-
-mgmt_cli -r true add host name "localhost" ipv4-address "127.0.0.1" color "blue" ignore-warnings true
   
 mgmt_cli -r true \
   add simple-gateway \
@@ -55,6 +63,7 @@ mgmt_cli -r true \
   identity-awareness-settings.identity-web-api true \
   identity-awareness-settings.identity-web-api-settings.authorized-clients.client "localhost" \
   identity-awareness-settings.identity-web-api-settings.authorized-clients.client-secret "cnienfrfeinueribf" 
+
 #
 ###
 EOF
